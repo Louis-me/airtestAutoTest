@@ -1,0 +1,7 @@
+.idea
+/.idea/
+__pycache__
+logs/
+apk/com.jianshu.haruki_6.6.1_2023006061.apk
+exe/chromedriver.exe
+test.py
