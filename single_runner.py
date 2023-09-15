@@ -214,8 +214,9 @@ class CustomAirtestCase(AirtestCase):
         # 按日期生成测试报告,方便对比历史报告，但是程序入口字段需要设置为"remove_log": False
         ut_log.info("测试报告本地路径：%s" % output_file)
         ut_log.info("测试报告访问服务器：%s/%s/%s/%s" % (data['report_host'], "log", log_date, put_html))
-        Element.driver.close()
-        Element.driver.quit()
+        if data["platform"] == "android":
+            Element.driver.close()
+            Element.driver.quit()
         # # 固定输出给CI
         # output_file = os.path.join(data["root_path"], "summary.html")
         # with io.open(output_file, 'w', encoding="utf-8") as f:

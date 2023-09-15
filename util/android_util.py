@@ -6,7 +6,7 @@ from util.read_ini1 import ReadIni
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 from airtest.core.android.android import *
 from util.log_util import log as ut_log
-
+from selenium_driver import Element
 
 def attached_devices():
     command_result = ''
@@ -26,6 +26,8 @@ def install_apk_(apk):
 
 
 def init_android(data):
+    print("-----设备名称----")
+    print(data["device"])
     if data["save_image"] == "1":
         ST.SAVE_IMAGE = True
         ut_log.info("由于设置了save_image为1,测试步骤需要截图")
@@ -35,6 +37,12 @@ def init_android(data):
     try:
         # 注意这里初始化设备需要正确
         auto_setup(__file__, devices=data["device"])
+        poco = AndroidUiautomationPoco(use_airtest_input=True, screenshot_each_action=False)
+
+        Element.poco = poco
+        # Element.poco1.put(poco)
+        print("初始化")
+        print(Element.poco)
     except Exception as e:
         ut_log.error("初始化设备异常,请检查=", data["device"])
         return
@@ -46,7 +54,7 @@ def init_android(data):
         un_install(pkg, apk)
     elif data["install_type"] == "1":
         ut_log.info("%s直接覆盖安装应用:%s" % (data["dev"], pkg))
-        update_install(apk)
+        # update_install(apk)
     else:
         print("应用不做任何处理")
     time.sleep(5)
@@ -67,7 +75,8 @@ def check_login():
     pass
 
     # 点击允许
-    poco = AndroidUiautomationPoco(use_airtest_input=True, screenshot_each_action=False)
+    # poco = AndroidUiautomationPoco(use_airtest_input=True, screenshot_each_action=False)
+    poco = Element.poco
     if poco("com.android.systemui:id/notification_allow").wait(2).exists():
         poco("com.android.systemui:id/notification_allow").click()
         # 后续是启动后对应用进行登录操作

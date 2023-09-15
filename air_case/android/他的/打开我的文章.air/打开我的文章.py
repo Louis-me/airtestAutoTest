@@ -11,7 +11,9 @@ common_path = os.path.join(abs_path.split("airtestAutoTest")[0], "airtestAutoTes
 sys.path.append(common_path)
 from app_util import *
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
-
+from util.selenium_driver import Element
+print("----打印poco--模拟器-")
+print(Element.poco)
 
 def operate():
     try:
@@ -30,7 +32,7 @@ def operate():
         # 向上滑动
         # poco("com.jianshu.haruki:id/refresh_view").focus([0.5, 0.5]).swipe([0.5, -0.5])
     except Exception as e:
-        snapshot(msg="报错后截图")
+        # snapshot(msg="报错后截图")
         raise e
 
 operate()

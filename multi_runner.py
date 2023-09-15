@@ -144,6 +144,8 @@ class CustomAirtestCase(AirtestCase):
         super(CustomAirtestCase, self).setUp()
 
     def run_case1(self, data_item):
+
+        print("开始运行了！！！！")
         """
 
         :param data_item: dict
@@ -163,6 +165,7 @@ class CustomAirtestCase(AirtestCase):
         # 初始化安装的打开应用的情况，这里应该做适配比如ios,web等情况
         if data_item["platform"]=="android":
             init_android(data_item)
+            pass
         elif data_item["platform"]=="web":
             print("执行web登录")
             get_driver(data_item["login_url"])
